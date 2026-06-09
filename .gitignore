@@ -1,0 +1,67 @@
+# ==========================================
+# Python Bytecode & Cache
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# ==========================================
+# Large Datasets & Archives
+# ==========================================
+# Large dataset directories and raw archive files should not go to GitHub
+archive.zip
+*.zip
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+
+# ==========================================
+# Large Model Weights & Checkpoints
+# ==========================================
+# Deep learning model weight files and folders are very large (often >100MB) and exceed GitHub limits.
+models/
+*.h5
+*.keras
+*.pth
+*.pt
+*.ckpt
+*.weights
+*.pb
+*.onnx
+
+# ==========================================
+# Environments & Credentials
+# ==========================================
+.env
+.venv
+env/
+venv/
+ENV/
+bin/
+lib/
+lib64/
+include/
+share/
+
+# ==========================================
+# IDEs & System Files
+# ==========================================
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+.DS_Store
+Thumbs.db
+
+# ==========================================
+# Logs & Outputs
+# ==========================================
+*.log
