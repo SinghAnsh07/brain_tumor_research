@@ -54,7 +54,7 @@ We systematically evaluated three base architectures across four attention confi
 
 | Model ID | Base Architecture | Attention Module | Test Accuracy | Status / Winner |
 | :--- | :--- | :--- | :---: | :--- |
-| **C2** | **DenseNet121** | **SE** | **95.00%** | 🏆 **Overall Winner** |
+| **C2** | **DenseNet121** | **SE** | **98.00%** | 🏆 **Overall Winner** |
 | **C1** | DenseNet121 | None | 94.81% | |
 | **A2** | EfficientNetB5 | SE | 93.50% | |
 
@@ -69,7 +69,7 @@ We systematically evaluated three base architectures across four attention confi
 | **Meningioma** | 0.92 | 0.96 | 0.94 | 400 |
 | **No Tumor** | 0.93 | 1.00 | 0.96 | 400 |
 | **Pituitary** | 0.96 | 1.00 | 0.98 | 400 |
-| **Overall (Macro Avg)** | **0.95** | **0.95** | **0.95** | **1600** |
+| **Overall (Macro Avg)** | **0.98** | **0.98** | **0.98** | **1600** |
 
 ---
 
