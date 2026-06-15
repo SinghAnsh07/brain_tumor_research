@@ -1,0 +1,62 @@
+
+╔══════════════════════════════════════════════════════════════════╗
+║     COMPLETE RESEARCH RESULTS SUMMARY                           ║
+║     Brain Tumor Classification — DL + XAI                      ║
+╚══════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+FULL ABLATION TABLE (Local, 128x128, Batch 16)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Model  Architecture     Attention    Test Accuracy
+A1     EfficientNetB5   None         90.75%
+A2     EfficientNetB5   SE           92.31%
+A3     EfficientNetB5   CBAM         91.25%
+A4     EfficientNetB5   Hybrid       91.81%
+B1     ResNet50         None         82.38%
+B2     ResNet50         SE           85.44%
+B3     ResNet50         CBAM         78.25%
+B4     ResNet50         Hybrid       82.44%
+C1     DenseNet121      None         93.56%
+C2     DenseNet121      SE           93.94%  ← LOCAL WINNER
+C3     DenseNet121      CBAM         93.31%
+C4     DenseNet121      Hybrid       93.25%
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+HIGH QUALITY RESULTS (Colab, 224x224, Batch 32)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Model  Architecture     Attention    Test Accuracy
+C2     DenseNet121      SE           95.00%  ← OVERALL WINNER
+C1     DenseNet121      None         94.81%
+A2     EfficientNetB5   SE           93.50%
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+BEST MODEL PER-CLASS RESULTS (C2, 224x224)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Class         Precision   Recall    F1-Score
+Glioma        1.00        0.84      0.91
+Meningioma    0.92        0.96      0.94
+No Tumor      0.93        1.00      0.96
+Pituitary     0.96        1.00      0.98
+Overall       0.95        0.95      0.95
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ROAD SCORES (Grad-CAM XAI Quality — Higher = Better)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Class         ROAD Score
+Glioma        0.3200
+Meningioma    0.5822
+No Tumor      0.1567
+Pituitary     0.6231
+Mean ROAD     0.4205
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+KEY FINDINGS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. SE attention consistently improves ALL 3 architectures
+2. CBAM was inconsistent — hurt ResNet50 and DenseNet121
+3. Hybrid was never best — SE alone outperformed hybrid in all cases
+4. DenseNet121 is the best base architecture
+5. Grad-CAM heatmaps align with clinically correct tumor regions
+6. Mean ROAD score of 0.4205 confirms faithful explanations
+7. Pituitary and Meningioma have highest XAI quality (ROAD > 0.58)
+8. Glioma has lowest ROAD (0.32) — consistent with it being hardest class

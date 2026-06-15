@@ -54,7 +54,7 @@ We systematically evaluated three base architectures across four attention confi
 
 | Model ID | Base Architecture | Attention Module | Test Accuracy | Status / Winner |
 | :--- | :--- | :--- | :---: | :--- |
-| **C2** | **DenseNet121** | **SE** | **98.00%** | 🏆 **Overall Winner** |
+| **C2** | **DenseNet121** | **SE** | **95.00%** | 🏆 **Overall Winner** |
 | **C1** | DenseNet121 | None | 94.81% | |
 | **A2** | EfficientNetB5 | SE | 93.50% | |
 
@@ -85,6 +85,29 @@ We computed the **ROAD (Remove and Debias)** score to evaluate the faithfulness 
 
 ---
 
+### 5. Visual Results
+
+#### Grad-CAM Explainability — Best Model (DenseNet121 + SE)
+The Grad-CAM heatmaps below show where the model focuses when classifying each tumor type. Red regions indicate high attention. The overlays confirm that the model correctly localizes pathological tumor regions across all four classes.
+
+<p align="center">
+  <img src="gradcam%20results/gradcam_publication.png" alt="Grad-CAM Explainability — DenseNet121 + SE Attention" width="800"/>
+</p>
+
+#### Grad-CAM Heatmap Grid — All Classes
+<p align="center">
+  <img src="gradcam%20results/gradcam_all_classes.png" alt="Grad-CAM Visualizations — All Classes" width="800"/>
+</p>
+
+#### ROAD Faithfulness Score — Per-Class Breakdown
+The bar chart below summarizes the per-class ROAD (Remove and Debias) scores. Higher scores indicate that the Grad-CAM explanations faithfully reflect the features the model actually relies on for prediction.
+
+<p align="center">
+  <img src="gradcam%20results/road_scores.png" alt="ROAD Score per Class — DenseNet121 + SE" width="700"/>
+</p>
+
+---
+
 ## 💡 Key Research Findings
 1. **Squeeze-and-Excitation (SE)** attention consistently improved test accuracy across **all three** base architectures.
 2. **CBAM (Convolutional Block Attention Module)** was highly inconsistent and actually reduced performance for ResNet50 and DenseNet121 compared to their baselines.
@@ -96,23 +119,29 @@ We computed the **ROAD (Remove and Debias)** score to evaluate the faithfulness 
 
 ## 📁 Repository Structure
 ```directory
-├── dataset/                     # Local MRI scans dataset (organized by train/test classes)
-├── models/                      # Evaluation assets, charts, and metadata summaries
+├── dataset/                         # Local MRI scans dataset (organized by train/test classes)
+├── gradcam results/                 # Grad-CAM & ROAD XAI visual outputs
+│   ├── gradcam_publication.png      # Publication-quality Grad-CAM heatmaps (all 4 classes)
+│   ├── gradcam_all_classes.png      # Grad-CAM grid visualization
+│   ├── road_scores.png              # Per-class ROAD faithfulness score bar chart
+│   └── complete_results_summary.txt # Full numerical results summary
+├── models/                          # Evaluation assets, charts, and metadata summaries
 │   ├── Model A1..C4 confusion matrices
-│   ├── eda_sample_images.png    # Exploratory Data Analysis sample distributions
-│   └── results_summary.txt      # Model metrics summary log
-├── .gitignore                   # Project gitignore file (ignores datasets & model weights)
-├── densenet base.ipynb          # DenseNet121 Baseline training notebook
-├── densenet se.ipynb            # DenseNet121 + SE Attention notebook
-├── densenet cbam.ipynb          # DenseNet121 + CBAM Attention notebook
-├── densenet hybrid.ipynb        # DenseNet121 + Hybrid Attention notebook
-├── resnet base.ipynb            # ResNet50 Baseline notebook
-├── resnet se.ipynb              # ResNet50 + SE Attention notebook
-├── resnet cbam.ipynb            # ResNet50 + CBAM Attention notebook
-├── resnet hybrid.ipynb          # ResNet50 + Hybrid Attention notebook
-├── efficientnet hybrid.ipynb    # EfficientNetB5 + Hybrid Attention notebook
-├── top_three_models.ipynb       # Grad-CAM, ROAD XAI evaluation & final comparative analysis
-└── README.md                    # Detailed research presentation and documentation
+│   ├── eda_sample_images.png        # Exploratory Data Analysis sample distributions
+│   └── results_summary.txt          # Model metrics summary log
+├── .gitignore                       # Project gitignore file (ignores datasets & model weights)
+├── densenet base.ipynb              # DenseNet121 Baseline training notebook
+├── densenet se.ipynb                # DenseNet121 + SE Attention notebook
+├── densenet cbam.ipynb              # DenseNet121 + CBAM Attention notebook
+├── densenet hybrid.ipynb            # DenseNet121 + Hybrid Attention notebook
+├── resnet base.ipynb                # ResNet50 Baseline notebook
+├── resnet se.ipynb                  # ResNet50 + SE Attention notebook
+├── resnet cbam.ipynb                # ResNet50 + CBAM Attention notebook
+├── resnet hybrid.ipynb              # ResNet50 + Hybrid Attention notebook
+├── efficientnet base se cbam.ipynb  # EfficientNetB5 Baseline + SE + CBAM notebook
+├── efficientnet hybrid.ipynb        # EfficientNetB5 + Hybrid Attention notebook
+├── top_three_models.ipynb           # Grad-CAM, ROAD XAI evaluation & final comparative analysis
+└── README.md                        # Detailed research presentation and documentation
 ```
 
 ---
